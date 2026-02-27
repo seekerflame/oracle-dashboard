@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <meta charset="UTF-8" />
+          <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Oracle | Live Signal Dashboard</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+                .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2rem; text-align: center; border-bottom: 1px solid rgba(139,92,246,0.3); }
+                .header h1 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; background: linear-gradient(135deg, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+                .header p { color: #9ca3af; margin-top: 0.5rem; }
+                .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+                .card { background: linear-gradient(145deg, #1a1a2e, #0f0f1a); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+                .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,0.15); }
+                .ticker { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+                .signal { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; margin-top: 0.5rem; }
+                .buy { background: rgba(34,197,94,0.2); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+                .strong-buy { background: rgba(34,197,94,0.3); color: #4ade80; border: 1px solid rgba(34,197,94,0.5); }
+                .hold { background: rgba(234,179,8,0.2); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+                .score { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
+                .score-label { color: #9ca3af; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+                .bar { height: 6px; background: #1f1f2e; border-radius: 3px; margin-top: 0.5rem; overflow: hidden; }
+                .bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+                .bullish { background: linear-gradient(90deg, #22c55e, #4ade80); }
+                .neutral { background: linear-gradient(90deg, #eab308, #fbbf24); }
+                .meta { display: flex; justify-content: space-between; margin-top: 1rem; color: #6b7280; font-size: 0.75rem; }
+                .footer { text-align: center; padding: 2rem; color: #4b5563; font-size: 0.875rem; border-top: 1px solid rgba(139,92,246,0.1); }
+                .footer a { color: #8b5cf6; text-decoration: none; }
+                .pulse { animation: pulse 2s infinite; }
+                @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+              </style>
+    </head>
+    <body>
+          <div class="header">
+                  <h1>Oracle Signal Dashboard</h1>
+                <p>Real-time market signals from the Oracle Engine <span class="pulse">LIVE</span>span></p>
+          </div>div>
+        <div class="grid">
+              <div class="card">
+                      <div class="ticker">NVDA</div>div>
+                      <div class="score-label">Composite Score</div>div>
+                      <div class="score" style="color:#4ade80">11 / 13</div>div>
+                      <span class="signal strong-buy">Strong Buy</span>span>
+                      <div class="bar"><div class="bar-fill bullish" style="width:84.6%"></div>div></div>div>
+                      <div class="meta"><span>RSI: 62.3</span><span>MACD: Bullish</span><span>Vol: High</span></div>div>
+              </div>div>
+              <div class="card">
+                      <div class="ticker">SPY</div>div>
+                      <div class="score-label">Composite Score</div>div>
+                      <div class="score" style="color:#22c55e">8 / 13</div>div>
+                      <span class="signal buy">Buy</span>
+                      <div class="bar"><div class="bar-fill bullish" style="width:61.5%"></div>div></div>div>
+                      <div class="meta"><span>RSI: 55.1</span><span>MACD: Neutral</span><span>Vol: Normal</span></div>div>
+              </div>div>
+              <div class="card">
+                      <div class="ticker">AAPL</div>div>
+                      <div class="score-label">Composite Score</div>div>
+                      <div class="score" style="color:#22c55e">9 / 13</div>div>
+                      <span class="signal buy">Buy</span>
+                      <div class="bar"><div class="bar-fill bullish" style="width:69.2%"></div>div></div>div>
+                      <div class="meta"><span>RSI: 58.7</span><span>MACD: Bullish</span><span>Vol: Normal</span></div>div>
+              </div>div>
+              <div class="card">
+                      <div class="ticker">TSLA</div>div>
+                      <div class="score-label">Composite Score</div>div>
+                      <div class="score" style="color:#eab308">4 / 13</div>div>
+                      <span class="signal hold">Hold</span>
+                      <div class="bar"><div class="bar-fill neutral" style="width:30.8%"></div>div></div>div>
+                      <div class="meta"><span>RSI: 42.1</span><span>MACD: Bearish</span><span>Vol: Low</span></div>div>
+              </div>div>
+        </div>div>
+        <div class="footer">
+              Built by <a href="https://github.com/seekerflame">EternalFlame</a>a> | <a href="https://github.com/seekerflame/loom-platform">Loom Platform</a>a>
+        </div>div>
+    </body>
+</html>html>
+</span></span></p></h1>
+    </body>
+        </style></title>
+    </head>
