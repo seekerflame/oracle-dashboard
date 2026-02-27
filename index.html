@@ -1,1 +1,72 @@
-<!-- Dynamic Oracle Dashboard - see raw file -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oracle | Live Signal Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06060f;--card:#0d0d1a;--border:rgba(139,92,246,.15);--text:#f0f0f5;--dim:#6b7280;--accent:#8b5cf6;--cyan:#06b6d4;--green:#22c55e;--red:#ef4444;--yellow:#eab308}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(at 20% 50%,rgba(139,92,246,.05) 0%,transparent 50%),radial-gradient(at 80% 20%,rgba(6,182,212,.04) 0%,transparent 50%);pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 1.5rem}
+.hdr{padding:2.5rem 0 1.5rem;text-align:center;border-bottom:1px solid var(--border)}
+.hdr h1{font-family:'Outfit',sans-serif;font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr .sub{color:#9ca3af;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pd 2s infinite;box-shadow:0 0 8px var(--green)}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.ts{color:var(--dim);font-size:.75rem;margin-top:.5rem}
+.sh{font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:600;color:#9ca3af;padding:2rem 0 1rem;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:.75rem}
+.sh::after{content:'';flex:1;height:1px;background:var(--border)}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;padding-bottom:1rem}
+.c{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .3s;position:relative;overflow:hidden}
+.c::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.c:hover{background:#111128;border-color:rgba(139,92,246,.4);transform:translateY(-3px);box-shadow:0 12px 40px rgba(139,92,246,.1)}
+.c:hover::before{opacity:1}
+.ct{display:flex;justify-content:space-between;align-items:flex-start}
+.tk{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:700}
+.pr{font-variant-numeric:tabular-nums;font-weight:600;font-size:1.1rem;text-align:right}
+.ch{font-size:.8rem;font-weight:500;padding:.15rem .5rem;border-radius:6px;display:inline-block;margin-top:.25rem}
+.ch.up{background:rgba(34,197,94,.15);color:var(--green)}
+.ch.dn{background:rgba(239,68,68,.15);color:var(--red)}
+.ss{margin:1.25rem 0}
+.sl{color:var(--dim);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.sc{font-family:'Outfit',sans-serif;font-size:2.5rem;font-weight:800;line-height:1.1;margin-top:.25rem}
+.sg{display:inline-block;padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;margin-top:.5rem}
+.sg.sb{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+.sg.b{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.sg.h{background:rgba(234,179,8,.15);color:var(--yellow);border:1px solid rgba(234,179,8,.2)}
+.sg.s{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.br{height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;margin-top:1rem}
+.bf{height:100%;border-radius:3px;transition:width 1s}
+.bf.bu{background:linear-gradient(90deg,var(--green),#4ade80)}
+.bf.ne{background:linear-gradient(90deg,var(--yellow),#fbbf24)}
+.bf.be{background:linear-gradient(90deg,var(--red),#f87171)}
+.ind{display:flex;justify-content:space-between;margin-top:.75rem;color:var(--dim);font-size:.7rem}
+.ft{text-align:center;padding:2.5rem 0;color:var(--dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:1rem}
+.ft a{color:var(--accent);text-decoration:none}
+@media(max-width:640px){.hdr h1{font-size:2rem}.g{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr"><h1>Oracle Signal Dashboard</h1><div class="sub"><span class="dot"></span>Real-time signals from the Oracle Engine</div><div class="ts" id="ts">Loading...</div></div>
+<div class="sh">Equities</div><div class="g" id="sG"></div>
+<div class="sh">Crypto (Live)</div><div class="g" id="cG"></div>
+<div class="ft">Built by <a href="https://github.com/seekerflame">EternalFlame</a> · <a href="https://github.com/seekerflame/loom-platform">Loom Platform</a> · Data: CoinGecko & Oracle Engine</div>
+</div>
+<script>
+const S=[{t:'NVDA',s:11,x:13,g:'Strong Buy',c:'sb',b:'bu',r:62.3,m:'Bullish',v:'High'},{t:'SPY',s:8,x:13,g:'Buy',c:'b',b:'bu',r:55.1,m:'Neutral',v:'Normal'},{t:'AAPL',s:9,x:13,g:'Buy',c:'b',b:'bu',r:58.7,m:'Bullish',v:'Normal'},{t:'TSLA',s:4,x:13,g:'Hold',c:'h',b:'ne',r:42.1,m:'Bearish',v:'Low'}];
+function rS(s){const p=((s.s/s.x)*100).toFixed(1),cl=s.s>=9?'#4ade80':s.s>=6?'#22c55e':s.s>=4?'#eab308':'#ef4444';return '<div class="c"><div class="ct"><div class="tk">'+s.t+'</div></div><div class="ss"><div class="sl">Composite Score</div><div class="sc" style="color:'+cl+'">'+s.s+' / '+s.x+'</div><span class="sg '+s.c+'">'+s.g+'</span></div><div class="br"><div class="bf '+s.b+'" style="width:'+p+'%"></div></div><div class="ind"><span>RSI: '+s.r+'</span><span>MACD: '+s.m+'</span><span>Vol: '+s.v+'</span></div></div>'}
+document.getElementById('sG').innerHTML=S.map(rS).join('');
+const C=[{id:'bitcoin',t:'BTC'},{id:'ethereum',t:'ETH'},{id:'solana',t:'SOL'},{id:'dogecoin',t:'DOGE'}];
+function fp(p){if(p>=1000)return'$'+p.toLocaleString('en-US',{maximumFractionDigits:0});if(p>=1)return'$'+p.toFixed(2);return'$'+p.toFixed(6)}
+function gs(c){if(c>5)return{g:'Strong Buy',c:'sb',b:'bu'};if(c>1)return{g:'Buy',c:'b',b:'bu'};if(c>-1)return{g:'Hold',c:'h',b:'ne'};return{g:'Sell',c:'s',b:'be'}}
+async function fC(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+C.map(c=>c.id).join(',')+'&vs_currencies=usd&include_24hr_change=true');const d=await r.json();document.getElementById('cG').innerHTML=C.map(c=>{const v=d[c.id];if(!v)return'';const ch=v.usd_24h_change,s=gs(ch),mo=Math.min(Math.max((ch+10)/20*100,5),95),dir=ch>=0?'up':'dn',sign=ch>=0?'+':'';return'<div class="c"><div class="ct"><div class="tk">'+c.t+'</div><div class="pr">'+fp(v.usd)+'<div class="ch '+dir+'">'+sign+ch.toFixed(2)+'%</div></div></div><div class="ss"><div class="sl">24h Momentum</div><span class="sg '+s.c+'">'+s.g+'</span></div><div class="br"><div class="bf '+s.b+'" style="width:'+mo.toFixed(0)+'%"></div></div><div class="ind"><span>24h: '+sign+ch.toFixed(2)+'%</span><span>Price: '+fp(v.usd)+'</span></div></div>'}).join('');document.getElementById('ts').textContent='Updated: '+new Date().toLocaleString()+' · Refreshes every 60s'}catch(e){document.getElementById('cG').innerHTML='<div class="c"><div class="tk">Error loading crypto</div><p style="color:var(--dim);margin-top:.5rem">Retrying in 60s</p></div>'}}
+fC();setInterval(fC,60000);
+</script>
+</body>
+</html>
